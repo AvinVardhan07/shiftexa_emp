@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&amp;display=swap');
+      .brand-s {
+        font-family: 'Oooh Baby', cursive, sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+        fill: #1A73E8;
+      }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#000000" />
+  <text x="32" y="45" text-anchor="middle" class="brand-s">S</text>
+</svg>
