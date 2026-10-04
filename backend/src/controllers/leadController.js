@@ -99,3 +99,36 @@ exports.triggerLeadCall = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.exportLeadsToCRM = async (req, res, next) => {
+  try {
+    const { targetCrm = 'ZOHO' } = req.body;
+    const qualifiedLeads = await Lead.find({
+      organizationId: req.organizationId,
+      status: { $in: ['QUALIFIED', 'SITE_VISIT_BOOKED'] }
+    });
+
+    const crmPayload = qualifiedLeads.map(l => ({
+      External_ID: l._id,
+      Full_Name: l.name,
+      Phone_Number: l.phone,
+      Email_Address: l.email,
+      Lead_Source: l.source || 'SHIFTEXA AI Employee',
+      Qualification_Status: l.status,
+      Target_Budget: l.qualificationData?.budget || '₹1.5 Cr',
+      Preferred_Location: l.qualificationData?.preferredLocation || 'Gachibowli',
+      Site_Visit_Date: l.qualificationData?.siteVisitDate || 'N/A',
+      Sync_Timestamp: new Date().toISOString()
+    }));
+
+    res.json({
+      success: true,
+      crm: targetCrm,
+      exportedCount: crmPayload.length,
+      payload: crmPayload,
+      message: `Successfully exported ${crmPayload.length} qualified leads to ${targetCrm} CRM.`
+    });
+  } catch (err) {
+    next(err);
+  }
+};

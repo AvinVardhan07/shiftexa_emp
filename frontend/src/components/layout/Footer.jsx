@@ -20,10 +20,6 @@ export default function Footer() {
               Empowering modern Indian enterprises with conversational digital workforce representatives. Automated regional lead qualification, site visit scheduling, and CRM syncing.
             </p>
             <div className="pt-2 flex items-center gap-3">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-[11px] font-semibold">
-                <span className="w-2 h-2 rounded-full bg-[#1A73E8] animate-pulse"></span>
-                <span>All Systems Operational</span>
-              </div>
               <div className="inline-flex items-center gap-1 text-[11px] text-[#5F6368] font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#1A73E8]" />
                 <span>Enterprise Grade Security</span>

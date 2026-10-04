@@ -7,5 +7,6 @@ router.use(authenticate);
 
 router.get('/', campaignController.getCampaigns);
 router.post('/', campaignController.createCampaign);
+router.patch('/:id/toggle', campaignController.toggleCampaignStatus);
 
 module.exports = router;

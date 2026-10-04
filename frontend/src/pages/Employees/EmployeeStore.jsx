@@ -108,9 +108,6 @@ export default function EmployeeStore() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-xs font-bold mb-2">
-            <span>SOLUTIONS MARKETPLACE</span>
-          </div>
           <h1 className="text-2xl md:text-3xl font-bold text-[#1F1F1F] tracking-tight">Browse <span className="text-[#1A73E8]">Workforce Solutions</span></h1>
           <p className="text-[#5F6368] text-xs md:text-sm mt-1 font-normal">Select pre-configured digital representatives for your business workflows.</p>
         </div>

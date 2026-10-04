@@ -7,6 +7,7 @@ router.use(authenticate);
 
 router.get('/', leadController.getLeads);
 router.post('/', leadController.createLead);
+router.post('/export-crm', leadController.exportLeadsToCRM);
 router.post('/:id/call', leadController.triggerLeadCall);
 
 module.exports = router;

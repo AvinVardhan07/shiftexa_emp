@@ -9,8 +9,22 @@ import {
   ChevronRight,
   Plus,
   Users,
-  Activity
+  Activity,
+  BarChart2,
+  PieChart as PieIcon
 } from 'lucide-react';
+import { 
+  ResponsiveContainer, 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  Tooltip, 
+  PieChart, 
+  Pie, 
+  Cell, 
+  Legend 
+} from 'recharts';
 import api from '../../services/api';
 import Badge from '../../components/common/Badge';
 
@@ -63,9 +77,6 @@ export default function Dashboard() {
       <div className="p-7 rounded-[28px] bg-[#F0F4F9] border border-[#E3E3E3] relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-xs font-bold mb-3">
-              <span>ABC PROPERTIES OPERATIONS</span>
-            </div>
             <h1 className="text-2xl md:text-3xl font-bold text-[#1F1F1F] tracking-tight">
               Welcome back, <span className="text-[#1A73E8]">Sales Team</span>
             </h1>
@@ -260,6 +271,88 @@ export default function Dashboard() {
           <div className="mt-4 pt-3 border-t border-[#E3E3E3] flex items-center justify-between text-[11px] text-[#5F6368]">
             <span>Showing recent activity for <strong className="text-[#1F1F1F]">ABC Properties</strong></span>
             <span className="text-[#1A73E8] font-semibold font-mono">₹3.50/min usage rate applied</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Recharts Analytics Section */}
+      <div className="grid md:grid-cols-3 gap-6">
+        {/* Chart 1: Call Volume & Minutes Trend */}
+        <div className="md:col-span-2 gemini-card p-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-[#1A73E8]" />
+              <h3 className="text-base font-bold text-[#1F1F1F]">Voice Call Volume & Conversion Trend</h3>
+            </div>
+            <span className="text-xs font-mono text-[#5F6368]">Past 7 Days</span>
+          </div>
+          <div className="h-56 w-full pt-2">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={[
+                { day: 'Mon', calls: 14, siteVisits: 8, minutes: 38 },
+                { day: 'Tue', calls: 22, siteVisits: 12, minutes: 54 },
+                { day: 'Wed', calls: 18, siteVisits: 10, minutes: 42 },
+                { day: 'Thu', calls: 28, siteVisits: 16, minutes: 71 },
+                { day: 'Fri', calls: 35, siteVisits: 21, minutes: 89 },
+                { day: 'Sat', calls: 42, siteVisits: 29, minutes: 110 },
+                { day: 'Sun', calls: 39, siteVisits: 26, minutes: 98 }
+              ]}>
+                <defs>
+                  <linearGradient id="colorCalls" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#1A73E8" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#1A73E8" stopOpacity={0.0}/>
+                  </linearGradient>
+                  <linearGradient id="colorVisits" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#34A853" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#34A853" stopOpacity={0.0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="day" stroke="#747775" fontSize={11} />
+                <YAxis stroke="#747775" fontSize={11} />
+                <Tooltip />
+                <Area type="monotone" dataKey="calls" stroke="#1A73E8" fillOpacity={1} fill="url(#colorCalls)" name="Total Voice Calls" />
+                <Area type="monotone" dataKey="siteVisits" stroke="#34A853" fillOpacity={1} fill="url(#colorVisits)" name="Booked Site Visits" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Chart 2: Customer Sentiment & Objection Breakdown */}
+        <div className="gemini-card p-6 space-y-3">
+          <div className="flex items-center gap-2">
+            <PieIcon className="w-4 h-4 text-[#1A73E8]" />
+            <h3 className="text-base font-bold text-[#1F1F1F]">Sentiment & Reluctance Heatmap</h3>
+          </div>
+          <div className="h-56 w-full flex items-center justify-center">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: 'Site Visit Booked', value: 52, color: '#1A73E8' },
+                    { name: 'Price / Budget Hesitation', value: 24, color: '#F9AB00' },
+                    { name: 'Family Proximity', value: 16, color: '#34A853' },
+                    { name: 'Project Comparison', value: 8, color: '#EA4335' }
+                  ]}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={45}
+                  outerRadius={75}
+                  paddingAngle={4}
+                  dataKey="value"
+                >
+                  {[
+                    { color: '#1A73E8' },
+                    { color: '#F9AB00' },
+                    { color: '#34A853' },
+                    { color: '#EA4335' }
+                  ].map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend iconSize={8} wrapperStyle={{ fontSize: '10px' }} />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>

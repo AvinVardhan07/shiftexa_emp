@@ -132,3 +132,61 @@ exports.getMe = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getTeamMembers = async (req, res, next) => {
+  try {
+    const members = await Membership.find({ organizationId: req.organizationId })
+      .populate('userId', 'name email createdAt')
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      members: members.map(m => ({
+        membershipId: m._id,
+        user: m.userId,
+        role: m.role,
+        joinedAt: m.createdAt
+      }))
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.inviteTeamMember = async (req, res, next) => {
+  try {
+    const { name, email, role } = req.body;
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Email address is required' });
+    }
+
+    let user = await User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+      const hashedPassword = await bcrypt.hash('ShiftexaTemp123!', 10);
+      user = await User.create({
+        name: name || email.split('@')[0],
+        email: email.toLowerCase(),
+        password: hashedPassword
+      });
+    }
+
+    let membership = await Membership.findOne({ userId: user._id, organizationId: req.organizationId });
+    if (membership) {
+      return res.status(400).json({ success: false, message: 'User is already a member of this organization' });
+    }
+
+    membership = await Membership.create({
+      userId: user._id,
+      organizationId: req.organizationId,
+      role: role || 'MEMBER'
+    });
+
+    res.status(201).json({
+      success: true,
+      membership,
+      message: `Successfully invited ${email} as ${role || 'MEMBER'}.`
+    });
+  } catch (err) {
+    next(err);
+  }
+};

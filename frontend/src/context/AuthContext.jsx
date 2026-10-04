@@ -16,8 +16,14 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     const token = localStorage.getItem('shiftexa_token');
     if (!token) {
-      // Auto demo user fallback for seamless experience
-      setDemoSession();
+      // Check if user previously initialized a demo session flag
+      const isDemo = localStorage.getItem('shiftexa_demo_session');
+      if (isDemo === 'true') {
+        setDemoSession();
+      } else {
+        setUser(null);
+        setOrganization(null);
+      }
       setLoading(false);
       return;
     }
@@ -32,11 +38,14 @@ export const AuthProvider = ({ children }) => {
           localStorage.setItem('shiftexa_org_id', res.data.currentOrganization._id);
         }
       } else {
-        setDemoSession();
+        localStorage.removeItem('shiftexa_token');
+        setUser(null);
+        setOrganization(null);
       }
     } catch (err) {
-      console.warn('Auth check fallback to demo session:', err.message);
-      setDemoSession();
+      localStorage.removeItem('shiftexa_token');
+      setUser(null);
+      setOrganization(null);
     } finally {
       setLoading(false);
     }
@@ -56,12 +65,19 @@ export const AuthProvider = ({ children }) => {
     setOrganization(demoOrg);
     setOrganizations([demoOrg]);
     localStorage.setItem('shiftexa_org_id', demoOrg._id);
+    localStorage.setItem('shiftexa_demo_session', 'true');
+  };
+
+  const loginDemo = () => {
+    setDemoSession();
+    return { success: true };
   };
 
   const login = async (email, password) => {
     try {
       const res = await api.post('/auth/login', { email, password });
       if (res.data.success) {
+        localStorage.removeItem('shiftexa_demo_session');
         localStorage.setItem('shiftexa_token', res.data.token);
         localStorage.setItem('shiftexa_org_id', res.data.organization.id);
         setUser(res.data.user);
@@ -77,6 +93,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await api.post('/auth/signup', { name, email, password, companyName });
       if (res.data.success) {
+        localStorage.removeItem('shiftexa_demo_session');
         localStorage.setItem('shiftexa_token', res.data.token);
         localStorage.setItem('shiftexa_org_id', res.data.organization.id);
         setUser(res.data.user);
@@ -91,13 +108,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('shiftexa_token');
     localStorage.removeItem('shiftexa_org_id');
+    localStorage.removeItem('shiftexa_demo_session');
     setUser(null);
     setOrganization(null);
-    setDemoSession();
   };
 
   return (
-    <AuthContext.Provider value={{ user, organization, organizations, loading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, organization, organizations, loading, login, signup, loginDemo, logout }}>
       {children}
     </AuthContext.Provider>
   );

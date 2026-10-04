@@ -43,3 +43,21 @@ exports.createCampaign = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.toggleCampaignStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const campaign = await Campaign.findOne({ _id: id, organizationId: req.organizationId });
+    if (!campaign) {
+      return res.status(404).json({ success: false, message: 'Campaign not found' });
+    }
+
+    campaign.status = campaign.status === 'RUNNING' ? 'PAUSED' : 'RUNNING';
+    await campaign.save();
+
+    res.json({ success: true, campaign });
+  } catch (err) {
+    next(err);
+  }
+};
+
