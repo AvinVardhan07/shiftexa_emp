@@ -88,14 +88,14 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate('/ai-employees/' + (meeraEmp._id || 'meera'))}
-              className="px-5 py-2.5 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white text-xs font-semibold flex items-center gap-2 transition shadow-none"
+              className="btn-gemini-primary px-5 py-2.5 text-xs font-semibold flex items-center gap-2"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>Test Call Studio</span>
             </button>
             <button
               onClick={() => navigate('/ai-employees/store')}
-              className="px-5 py-2.5 rounded-full bg-white hover:bg-[#F8F9FA] text-[#1F1F1F] border border-[#747775] text-xs font-semibold transition"
+              className="btn-gemini-outline px-5 py-2.5 text-xs font-semibold"
             >
               Add Representative
             </button>
@@ -200,7 +200,7 @@ export default function Dashboard() {
 
           <button
             onClick={() => navigate('/ai-employees/' + (meeraEmp._id || 'meera'))}
-            className="w-full py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition shadow-none"
+            className="btn-gemini-primary w-full py-3 text-xs font-semibold flex items-center justify-center gap-1.5"
           >
             <span>Configure Representative Studio</span>
             <ChevronRight className="w-4 h-4" />

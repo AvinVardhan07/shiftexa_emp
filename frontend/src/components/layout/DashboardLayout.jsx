@@ -8,12 +8,12 @@ export default function DashboardLayout() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#FFFFFF] text-slate-900 font-sans relative overflow-x-hidden">
+    <div className="flex min-h-screen bg-transparent text-slate-900 font-sans relative overflow-x-hidden">
       <Sidebar
         isMobileOpen={isMobileSidebarOpen}
         onClose={() => setIsMobileSidebarOpen(false)}
       />
-      <div className="flex-1 flex flex-col min-w-0 z-10 bg-[#FFFFFF]">
+      <div className="flex-1 flex flex-col min-w-0 z-10 bg-transparent">
         <Header
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
         />

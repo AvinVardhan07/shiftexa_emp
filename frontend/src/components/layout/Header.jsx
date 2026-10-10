@@ -26,7 +26,7 @@ export default function Header({ onToggleMobileSidebar }) {
   };
 
   return (
-    <header className="h-16 bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E3E3E3] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 font-sans select-none">
+    <header className="h-16 bg-[#FFFFFF]/90 backdrop-blur-md border-b border-[#E3E3E3] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 font-sans select-none">
       {/* Mobile Hamburger & Active Organization Switcher */}
       <div className="flex items-center gap-2.5">
         <button
@@ -50,7 +50,7 @@ export default function Header({ onToggleMobileSidebar }) {
         {/* Quick Action Test Call */}
         <button
           onClick={() => navigate('/ai-employees')}
-          className="hidden sm:flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full bg-white hover:bg-[#F8F9FA] text-[#1F1F1F] border border-[#747775] transition"
+          className="btn-gemini-outline hidden sm:flex items-center gap-1.5 text-xs font-semibold px-4 py-2"
         >
           <PhoneCall className="w-3.5 h-3.5 text-[#1A73E8]" />
           <span>Test Call</span>
@@ -59,7 +59,7 @@ export default function Header({ onToggleMobileSidebar }) {
         {/* Hire Employee CTA */}
         <button
           onClick={() => navigate('/ai-employees/store')}
-          className="flex items-center gap-1 text-xs font-semibold px-3 sm:px-4 py-2 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white transition shadow-none"
+          className="btn-gemini-primary flex items-center gap-1.5 text-xs font-semibold px-3 sm:px-4 py-2"
         >
           <Plus className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Add Representative</span>

@@ -29,8 +29,8 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-[#1F1F1F] flex items-center justify-center p-4 relative overflow-hidden font-sans">
-      <div className="w-full max-w-md bg-white border border-[#E3E3E3] rounded-3xl p-8 sm:p-10 shadow-sm relative z-10">
+    <div className="min-h-screen bg-transparent text-[#1F1F1F] flex items-center justify-center p-4 relative overflow-hidden font-sans">
+      <div className="w-full max-w-md bg-white/92 backdrop-blur-md border border-[#E3E3E3] rounded-3xl p-8 sm:p-10 shadow-sm relative z-10">
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <span className="font-brand text-5xl font-bold text-[#1F1F1F] tracking-tight">Shiftexa</span>
@@ -108,7 +108,7 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs shadow-none flex items-center justify-center gap-2 transition"
+            className="btn-gemini-primary w-full py-3 text-xs font-semibold flex items-center justify-center gap-2"
           >
             <span>{loading ? 'Creating Account...' : 'Get Started'}</span>
             <ArrowRight className="w-4 h-4" />

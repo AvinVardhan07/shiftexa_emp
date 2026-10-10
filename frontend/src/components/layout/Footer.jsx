@@ -4,7 +4,7 @@ import { ShieldCheck, Globe, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FFFFFF] border-t border-[#E3E3E3] pt-12 pb-8 font-sans text-[#1F1F1F] mt-auto">
+    <footer className="bg-[#FFFFFF]/90 backdrop-blur-md border-t border-[#E3E3E3] pt-12 pb-8 font-sans text-[#1F1F1F] mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-[#E3E3E3]">

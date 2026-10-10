@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, Plus, Activity, Layers } from 'lucide-react';
 import api from '../../services/api';
 import Modal from '../../components/common/Modal';
+import JellyRadio from '../../components/common/JellyRadio';
 
 export default function EmployeeStore() {
   const navigate = useNavigate();
@@ -113,20 +114,17 @@ export default function EmployeeStore() {
         </div>
 
         {/* Category Filters */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-          {['ALL', 'Real Estate', 'Reception', 'Education'].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition ${
-                selectedCategory === cat
-                  ? 'bg-[#1A73E8] text-white shadow-none'
-                  : 'bg-white text-[#1F1F1F] border border-[#747775] hover:bg-[#F8F9FA]'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="overflow-x-auto pb-2 md:pb-0">
+          <JellyRadio
+            items={['ALL', 'Real Estate', 'Reception', 'Education']}
+            value={selectedCategory}
+            onChange={(cat) => setSelectedCategory(cat)}
+            size="sm"
+            activeColor="#1A73E8"
+            activeTextColor="#FFFFFF"
+            chipColor="#F0F4F9"
+            textColor="#1F1F1F"
+          />
         </div>
       </div>
 

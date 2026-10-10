@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import api from '../../services/api';
 import Badge from '../../components/common/Badge';
+import JellyRadio from '../../components/common/JellyRadio';
 import WaveformVisualizer from '../../components/common/WaveformVisualizer';
 import Modal from '../../components/common/Modal';
 
@@ -289,29 +290,22 @@ export default function EmployeeDetail() {
       </div>
 
       {/* Tabs Header */}
-      <div className="flex items-center gap-2 border-b border-[#E3E3E3] pb-3 overflow-x-auto whitespace-nowrap scrollbar-none">
-        {[
-          { id: 'STUDIO', label: 'Call Simulation', icon: PhoneCall },
-          { id: 'BRAIN', label: 'Knowledge Base', icon: Building2 },
-          { id: 'VOICE', label: 'Language Settings', icon: Globe },
-          { id: 'VERSIONS', label: 'Version History', icon: History },
-        ].map((tab) => {
-          const Icon = tab.icon;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition shrink-0 ${
-                activeTab === tab.id
-                  ? 'bg-[#1A73E8] text-white shadow-none'
-                  : 'text-[#1F1F1F] hover:bg-[#F8F9FA] border border-transparent hover:border-[#E3E3E3]'
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
+      <div className="border-b border-[#E3E3E3] pb-3 overflow-x-auto whitespace-nowrap scrollbar-none">
+        <JellyRadio
+          items={[
+            { value: 'STUDIO', label: 'Call Simulation', icon: <PhoneCall className="w-3.5 h-3.5" /> },
+            { value: 'BRAIN', label: 'Knowledge Base', icon: <Building2 className="w-3.5 h-3.5" /> },
+            { value: 'VOICE', label: 'Language Settings', icon: <Globe className="w-3.5 h-3.5" /> },
+            { value: 'VERSIONS', label: 'Version History', icon: <History className="w-3.5 h-3.5" /> },
+          ]}
+          value={activeTab}
+          onChange={(tabId) => setActiveTab(tabId)}
+          activeColor="#1A73E8"
+          activeTextColor="#FFFFFF"
+          chipColor="#F0F4F9"
+          textColor="#444746"
+          size="md"
+        />
       </div>
 
       {/* TAB 1: TEST CALL STUDIO */}

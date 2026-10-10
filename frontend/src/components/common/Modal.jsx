@@ -12,16 +12,18 @@ export default function Modal({ isOpen, onClose, title, children, maxWidth = 'ma
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          className={`w-full ${maxWidth} bg-[#111827] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]`}
+          className={`w-full ${maxWidth} bg-white border border-[#E3E3E3] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] font-sans`}
         >
           {/* Header */}
-          <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-            <h3 className="text-lg font-bold text-slate-100">{title}</h3>
+          <div className="px-6 py-4 border-b border-[#E3E3E3] flex items-center justify-between bg-[#F0F4F9]/60">
+            <h3 className="text-base font-bold text-[#1F1F1F]">{title}</h3>
             <button
+              type="button"
               onClick={onClose}
-              className="p-1 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+              className="p-1.5 rounded-full text-[#5F6368] hover:text-[#1F1F1F] hover:bg-[#E3E3E3]/60 transition"
+              aria-label="Close dialog"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 

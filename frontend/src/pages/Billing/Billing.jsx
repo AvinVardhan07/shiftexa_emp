@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Wallet, Plus, CreditCard, FileText, Download, ShieldCheck, Zap, RefreshCw } from 'lucide-react';
 import api from '../../services/api';
 import Modal from '../../components/common/Modal';
+import JellyRadio from '../../components/common/JellyRadio';
 
 export default function Billing() {
   const [wallet, setWallet] = useState({ balance: 500.00, autoRechargeEnabled: false, lowBalanceThreshold: 100 });
@@ -243,21 +244,21 @@ export default function Billing() {
         <form onSubmit={handleTopUpSubmit} className="space-y-4 font-sans">
           <div>
             <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Select Credit Top-Up Amount (INR)</label>
-            <div className="grid grid-cols-3 gap-2 mb-3">
-              {[500, 1000, 2500].map((amt) => (
-                <button
-                  key={amt}
-                  type="button"
-                  onClick={() => setTopUpAmount(amt)}
-                  className={`py-2 rounded-full text-xs font-semibold border transition ${
-                    topUpAmount === amt
-                      ? 'bg-[#1A73E8] text-white border-[#1A73E8]'
-                      : 'bg-[#F0F4F9] text-[#1F1F1F] border-[#E3E3E3] hover:border-[#747775]'
-                  }`}
-                >
-                  ₹{amt}
-                </button>
-              ))}
+            <div className="mb-3 flex justify-center sm:justify-start">
+              <JellyRadio
+                items={[
+                  { value: '500', label: '₹500' },
+                  { value: '1000', label: '₹1,000' },
+                  { value: '2500', label: '₹2,500' }
+                ]}
+                value={String(topUpAmount)}
+                onChange={(val) => setTopUpAmount(Number(val))}
+                activeColor="#1A73E8"
+                activeTextColor="#FFFFFF"
+                chipColor="#F0F4F9"
+                textColor="#1F1F1F"
+                size="md"
+              />
             </div>
             <input
               type="number"

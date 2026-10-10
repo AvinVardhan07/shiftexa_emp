@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
+import Dock from '../common/Dock';
 
 export default function Sidebar({ isMobileOpen, onClose }) {
   const location = useLocation();
@@ -79,11 +80,57 @@ export default function Sidebar({ isMobileOpen, onClose }) {
   const renderSidebarContent = (isMobile = false) => {
     const collapsed = !isMobile && isCollapsed;
 
+    // Create macOS dock items configuration for the collapsed vertical sidebar
+    const dockItems = navItems.map((item) => {
+      const Icon = item.icon;
+      const isActive = location.pathname === item.path || (item.path !== '/dashboard' && location.pathname.startsWith(item.path));
+
+      // Right-click quick action context menus
+      const menuOptions = [];
+      if (item.path === '/dashboard') {
+        menuOptions.push({ label: 'Overview', onClick: () => navigate('/dashboard') });
+        menuOptions.push({ label: 'Refresh Dashboard', onClick: () => window.location.reload() });
+      } else if (item.path === '/ai-employees/store') {
+        menuOptions.push({ label: 'Browse Solutions', onClick: () => navigate('/ai-employees/store') });
+        menuOptions.push({ label: 'Hire Agent', onClick: () => navigate('/ai-employees/store') });
+      } else if (item.path === '/ai-employees') {
+        menuOptions.push({ label: 'Meera (Online)', onClick: () => navigate('/ai-employees') });
+        menuOptions.push({ label: 'All Active Workers', onClick: () => navigate('/ai-employees') });
+      } else if (item.path === '/leads') {
+        menuOptions.push({ label: 'Leads List', onClick: () => navigate('/leads') });
+        menuOptions.push({ label: 'Import Contacts', onClick: () => navigate('/leads') });
+      } else if (item.path === '/calls') {
+        menuOptions.push({ label: 'Call Records', onClick: () => navigate('/calls') });
+        menuOptions.push({ label: 'Transcripts', onClick: () => navigate('/calls') });
+      } else if (item.path === '/campaigns') {
+        menuOptions.push({ label: 'Campaign Monitor', onClick: () => navigate('/campaigns') });
+        menuOptions.push({ label: 'New Campaign', onClick: () => navigate('/campaigns') });
+      } else if (item.path === '/integrations') {
+        menuOptions.push({ label: 'Active Integrations', onClick: () => navigate('/integrations') });
+        menuOptions.push({ label: 'Webhook Settings', onClick: () => navigate('/integrations') });
+      } else if (item.path === '/billing') {
+        menuOptions.push({ label: `Wallet Balance: ₹${walletBalance.toFixed(2)}`, onClick: () => navigate('/billing') });
+        menuOptions.push({ label: 'Top-Up Wallet', onClick: () => navigate('/billing') });
+      } else if (item.path === '/settings') {
+        menuOptions.push({ label: 'Profile Settings', onClick: () => navigate('/settings') });
+        menuOptions.push({ label: 'Preferences', onClick: () => navigate('/settings') });
+      }
+
+      return {
+        icon: <Icon className="w-5 h-5 transition-transform duration-200" />,
+        label: item.value ? `${item.name} (${item.value})` : item.name,
+        active: isActive,
+        badge: undefined, // Never display full-text badges on collapsed dock items to prevent icon overlap
+        onClick: () => navigate(item.path),
+        menu: menuOptions.length > 0 ? menuOptions : undefined
+      };
+    });
+
     return (
-      <div className={`bg-[#FFFFFF] border-r border-[#E3E3E3] flex flex-col justify-between min-h-screen select-none h-full font-sans transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
-        <div>
+      <div className={`bg-[#FFFFFF]/90 backdrop-blur-md border-r border-[#E3E3E3] flex flex-col justify-between min-h-screen select-none h-full font-sans transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
+        <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           {/* Brand Logo & Menu Open/Close Toggle Header */}
-          <div className={`p-4 border-b border-[#E3E3E3] flex items-center bg-[#FFFFFF] ${collapsed ? 'justify-center py-4 px-2' : 'justify-between px-4'}`}>
+          <div className={`border-b border-[#E3E3E3] flex items-center bg-transparent shrink-0 ${collapsed ? 'justify-center py-3 px-1' : 'justify-between p-4'}`}>
             {!collapsed && (
               <NavLink to="/dashboard" className="flex items-center overflow-hidden">
                 <span className="font-brand text-3xl font-bold text-[#1F1F1F] tracking-tight truncate">
@@ -116,7 +163,7 @@ export default function Sidebar({ isMobileOpen, onClose }) {
 
           {/* Featured Active Worker Card */}
           {!collapsed ? (
-            <div className="mx-3 my-3 p-3.5 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] relative overflow-hidden transition-all">
+            <div className="mx-3 my-3 p-3.5 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] relative overflow-hidden transition-all shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
@@ -130,7 +177,7 @@ export default function Sidebar({ isMobileOpen, onClose }) {
               <p className="text-[11px] text-[#5F6368] mt-1 font-normal">Real Estate Sales Representative</p>
             </div>
           ) : (
-            <div className="mx-auto my-3 w-10 h-10 rounded-xl bg-[#F0F4F9] border border-[#E3E3E3] flex items-center justify-center relative" title="Meera Representative (Online)">
+            <div className="mx-auto my-2 w-9 h-9 rounded-xl bg-[#F0F4F9] border border-[#E3E3E3] flex items-center justify-center relative shrink-0" title="Meera Representative (Online)">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A73E8] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#1A73E8]"></span>
@@ -138,64 +185,69 @@ export default function Sidebar({ isMobileOpen, onClose }) {
             </div>
           )}
 
-          {/* Navigation Items */}
-          <nav className="p-2 space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = location.pathname === item.path || (item.path !== '/dashboard' && location.pathname.startsWith(item.path));
-              
-              if (collapsed) {
+          {/* Navigation Items (Interactive Vertical Dock for collapsed, standard nav for expanded) */}
+          {collapsed ? (
+            <div className="relative flex-1 min-h-0 flex flex-col items-center justify-center py-1 overflow-visible">
+              <Dock
+                items={dockItems}
+                baseItemSize={38}
+                magnification={50}
+                panelHeight={46}
+                accentColor="#1A73E8"
+                badgeColor="#1A73E8"
+                position="left"
+                distance={130}
+                gap={4}
+                roundness={0.45}
+                bounce
+                autoHide={false}
+                tiles
+                showLabels
+                showIndicators
+                showBadges={false}
+                theme="light"
+                className="sidebar-dock"
+              />
+            </div>
+          ) : (
+            <nav className="p-2 space-y-1 overflow-y-auto">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path || (item.path !== '/dashboard' && location.pathname.startsWith(item.path));
+
                 return (
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    title={item.name}
-                    className={`w-12 h-12 mx-auto flex items-center justify-center rounded-full transition-all duration-150 relative ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 ${
                       isActive
                         ? 'bg-[#E8F0FE] text-[#1A73E8]'
                         : 'text-[#444746] hover:text-[#1F1F1F] hover:bg-[#F8F9FA]'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 ${isActive ? 'text-[#1A73E8]' : 'text-[#5F6368]'}`} />
-                    {isActive && (
-                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-[#1A73E8] rounded-r-full"></span>
+                    <div className="flex items-center gap-2.5">
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#1A73E8]' : 'text-[#5F6368]'}`} />
+                      <span>{item.name}</span>
+                    </div>
+                    {item.badge && (
+                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-mono">
+                        {item.badge}
+                      </span>
+                    )}
+                    {item.value && (
+                      <span className="text-[10px] font-semibold font-mono text-[#1A73E8] bg-[#E8F0FE] px-2 py-0.5 rounded-full">
+                        {item.value}
+                      </span>
                     )}
                   </NavLink>
                 );
-              }
-
-              return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 ${
-                    isActive
-                      ? 'bg-[#E8F0FE] text-[#1A73E8]'
-                      : 'text-[#444746] hover:text-[#1F1F1F] hover:bg-[#F8F9FA]'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#1A73E8]' : 'text-[#5F6368]'}`} />
-                    <span>{item.name}</span>
-                  </div>
-                  {item.badge && (
-                    <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-mono">
-                      {item.badge}
-                    </span>
-                  )}
-                  {item.value && (
-                    <span className="text-[10px] font-semibold font-mono text-[#1A73E8] bg-[#E8F0FE] px-2 py-0.5 rounded-full">
-                      {item.value}
-                    </span>
-                  )}
-                </NavLink>
-              );
-            })}
-          </nav>
+              })}
+            </nav>
+          )}
         </div>
 
         {/* Bottom CTA Card & Logout Option */}
-        <div className="p-3 border-t border-[#E3E3E3] space-y-2">
+        <div className={`border-t border-[#E3E3E3] shrink-0 ${collapsed ? 'p-2 space-y-1.5' : 'p-3 space-y-2'}`}>
           {!collapsed ? (
             <div className="p-3 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] text-center">
               <div className="flex items-center justify-between mb-2">
@@ -214,9 +266,9 @@ export default function Sidebar({ isMobileOpen, onClose }) {
             <NavLink
               to="/billing"
               title={`Wallet: ₹${walletBalance.toFixed(2)} - Click to Top-Up`}
-              className="w-12 h-12 mx-auto rounded-full bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center hover:bg-[#D2E3FC] transition"
+              className="w-9 h-9 mx-auto rounded-xl bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center hover:bg-[#D2E3FC] hover:scale-105 active:scale-95 transition-all duration-200 border border-[#1A73E8]/20 shadow-xs"
             >
-              <Wallet className="w-5 h-5" />
+              <Wallet className="w-4 h-4" />
             </NavLink>
           )}
 
@@ -233,9 +285,9 @@ export default function Sidebar({ isMobileOpen, onClose }) {
             <button
               onClick={handleLogout}
               title="Sign Out"
-              className="w-12 h-12 mx-auto rounded-full hover:bg-rose-50 text-[#D93025] flex items-center justify-center transition"
+              className="w-9 h-9 mx-auto rounded-xl hover:bg-rose-50 text-[#D93025] flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200"
             >
-              <LogOut className="w-5 h-5" />
+              <LogOut className="w-4 h-4" />
             </button>
           )}
         </div>

@@ -68,10 +68,10 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-[#1F1F1F] flex flex-col font-sans">
+    <div className="min-h-screen bg-transparent text-[#1F1F1F] flex flex-col font-sans">
       {/* Top Banner Notice */}
       {showBanner && (
-        <div className="bg-[#E8F0FE] text-xs py-2.5 px-4 flex items-center justify-center gap-2 border-b border-[#D2E3FC] text-[#1A73E8] relative">
+        <div className="bg-[#E8F0FE]/95 backdrop-blur-xs text-xs py-2.5 px-4 flex items-center justify-center gap-2 border-b border-[#D2E3FC] text-[#1A73E8] relative">
           <span>
             <strong>New Release:</strong> Autonomous Voice Representative <strong>Meera</strong> is live for Real Estate Enterprises.{' '}
             <a href="#solutions" className="font-semibold underline hover:text-[#1557B0]">
@@ -89,7 +89,7 @@ export default function LandingPage() {
       )}
 
       {/* Header Navigation */}
-      <nav className="h-16 border-b border-[#E3E3E3] px-4 md:px-12 flex items-center justify-between sticky top-0 bg-[#FFFFFF]/95 backdrop-blur-md z-40">
+      <nav className="h-16 border-b border-[#E3E3E3] px-4 md:px-12 flex items-center justify-between sticky top-0 bg-[#FFFFFF]/90 backdrop-blur-md z-40">
         <div className="flex items-center cursor-pointer gap-2" onClick={() => navigate('/')}>
           <span className="font-brand text-3xl font-bold text-[#1F1F1F] tracking-tight">
             Shiftexa
@@ -105,16 +105,16 @@ export default function LandingPage() {
         </div>
 
         {/* Right CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <button 
             onClick={() => navigate('/login')} 
-            className="text-sm font-medium text-[#444746] hover:text-[#1F1F1F]"
+            className="btn-gemini-outline px-4 py-2 text-xs font-semibold"
           >
             Sign In
           </button>
           <button 
             onClick={() => navigate('/signup')} 
-            className="rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs px-5 py-2.5 transition shadow-none flex items-center gap-1.5"
+            className="btn-gemini-primary px-5 py-2.5 text-xs font-semibold flex items-center gap-1.5"
           >
             <span>Deploy Voice Representative</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -197,7 +197,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <button
               onClick={() => navigate('/signup')}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white text-sm font-semibold transition shadow-md flex items-center justify-center gap-2"
+              className="btn-gemini-primary w-full sm:w-auto px-8 py-4 text-sm font-semibold flex items-center justify-center gap-2"
             >
               <span>Deploy Your First Representative</span>
               <ArrowRight className="w-4 h-4" />
@@ -205,7 +205,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => navigate('/login')}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-[#F8F9FA] text-[#1F1F1F] border border-[#747775] text-sm font-semibold transition flex items-center justify-center gap-2"
+              className="btn-gemini-outline w-full sm:w-auto px-8 py-4 text-sm font-semibold flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-[#1A73E8]" />
               <span>Explore Live Dashboard</span>
@@ -668,7 +668,7 @@ export default function LandingPage() {
               <div key={index} className="py-5">
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center justify-between text-left text-base font-semibold text-[#1F1F1F] hover:text-[#1A73E8] transition gap-4"
+                  className="w-full flex items-center justify-between text-left text-base font-semibold text-[#1F1F1F] hover:text-[#1A73E8] transition gap-4 no-jelly"
                 >
                   <span>{faq.q}</span>
                   {openFaq === index ? (
