@@ -127,13 +127,13 @@ export default function Sidebar({ isMobileOpen, onClose }) {
     });
 
     return (
-      <div className={`bg-[#FFFFFF]/90 backdrop-blur-md border-r border-[#E3E3E3] flex flex-col justify-between min-h-screen select-none h-full font-sans transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
+      <div className={`bg-white/95 backdrop-blur-md border-r border-slate-200/80 flex flex-col justify-between min-h-screen select-none h-full font-sans transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
         <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
           {/* Brand Logo & Menu Open/Close Toggle Header */}
-          <div className={`border-b border-[#E3E3E3] flex items-center bg-transparent shrink-0 ${collapsed ? 'justify-center py-3 px-1' : 'justify-between p-4'}`}>
+          <div className={`border-b border-slate-200/80 flex items-center bg-transparent shrink-0 ${collapsed ? 'justify-center py-3 px-1' : 'justify-between p-4'}`}>
             {!collapsed && (
               <NavLink to="/dashboard" className="flex items-center overflow-hidden">
-                <span className="font-brand text-3xl font-bold text-[#1F1F1F] tracking-tight truncate">
+                <span className="font-brand text-2xl font-bold text-slate-900 tracking-tight truncate">
                   Shiftexa
                 </span>
               </NavLink>
@@ -143,7 +143,7 @@ export default function Sidebar({ isMobileOpen, onClose }) {
             {isMobile ? (
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-full hover:bg-[#F0F4F9] text-[#5F6368] transition"
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition"
                 aria-label="Close menu"
               >
                 <X className="w-5 h-5" />
@@ -153,34 +153,34 @@ export default function Sidebar({ isMobileOpen, onClose }) {
               <button
                 onClick={toggleCollapse}
                 title={collapsed ? "Expand sidebar menu" : "Collapse sidebar menu"}
-                className={`p-2 rounded-full hover:bg-[#F0F4F9] text-[#5F6368] transition flex items-center justify-center ${collapsed ? 'mx-auto' : ''}`}
+                className={`p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition flex items-center justify-center ${collapsed ? 'mx-auto' : ''}`}
                 aria-label={collapsed ? "Expand sidebar menu" : "Collapse sidebar menu"}
               >
-                {collapsed ? <ChevronRight className="w-5 h-5 text-[#1A73E8]" /> : <ChevronLeft className="w-4 h-4 text-[#5F6368]" />}
+                {collapsed ? <ChevronRight className="w-4 h-4 text-slate-600" /> : <ChevronLeft className="w-4 h-4 text-slate-500" />}
               </button>
             )}
           </div>
 
           {/* Featured Active Worker Card */}
           {!collapsed ? (
-            <div className="mx-3 my-3 p-3.5 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] relative overflow-hidden transition-all shrink-0">
+            <div className="mx-3 my-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 relative overflow-hidden transition-all shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A73E8] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1A73E8]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-xs font-semibold text-[#1F1F1F]">Meera Representative</span>
+                  <span className="text-xs font-medium text-slate-900">Meera</span>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-bold font-mono">₹3.5/min</span>
+                <span className="text-[11px] px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600 font-medium">₹3.50/min</span>
               </div>
-              <p className="text-[11px] text-[#5F6368] mt-1 font-normal">Real Estate Sales Representative</p>
+              <p className="text-xs text-slate-500 mt-1">Real Estate Sales Representative</p>
             </div>
           ) : (
-            <div className="mx-auto my-2 w-9 h-9 rounded-xl bg-[#F0F4F9] border border-[#E3E3E3] flex items-center justify-center relative shrink-0" title="Meera Representative (Online)">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1A73E8] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#1A73E8]"></span>
+            <div className="mx-auto my-2 w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center relative shrink-0" title="Meera Representative (Online)">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
             </div>
           )}
@@ -193,8 +193,8 @@ export default function Sidebar({ isMobileOpen, onClose }) {
                 baseItemSize={38}
                 magnification={50}
                 panelHeight={46}
-                accentColor="#1A73E8"
-                badgeColor="#1A73E8"
+                accentColor="#2563EB"
+                badgeColor="#2563EB"
                 position="left"
                 distance={130}
                 gap={4}
@@ -219,23 +219,23 @@ export default function Sidebar({ isMobileOpen, onClose }) {
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-150 ${
+                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                       isActive
-                        ? 'bg-[#E8F0FE] text-[#1A73E8]'
-                        : 'text-[#444746] hover:text-[#1F1F1F] hover:bg-[#F8F9FA]'
+                        ? 'bg-blue-50 text-blue-700 font-semibold'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#1A73E8]' : 'text-[#5F6368]'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
                       <span>{item.name}</span>
                     </div>
                     {item.badge && (
-                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-mono">
+                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
                         {item.badge}
                       </span>
                     )}
                     {item.value && (
-                      <span className="text-[10px] font-semibold font-mono text-[#1A73E8] bg-[#E8F0FE] px-2 py-0.5 rounded-full">
+                      <span className="text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                         {item.value}
                       </span>
                     )}
@@ -247,26 +247,26 @@ export default function Sidebar({ isMobileOpen, onClose }) {
         </div>
 
         {/* Bottom CTA Card & Logout Option */}
-        <div className={`border-t border-[#E3E3E3] shrink-0 ${collapsed ? 'p-2 space-y-1.5' : 'p-3 space-y-2'}`}>
+        <div className={`border-t border-slate-200 shrink-0 ${collapsed ? 'p-2 space-y-1.5' : 'p-3 space-y-2'}`}>
           {!collapsed ? (
-            <div className="p-3 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] text-center">
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] text-[#5F6368] font-medium uppercase tracking-wider">Wallet Balance</span>
-                <span className="text-xs font-bold text-[#1A73E8] font-mono">₹{walletBalance.toFixed(2)}</span>
+                <span className="text-xs text-slate-500 font-medium">Wallet Balance</span>
+                <span className="text-xs font-semibold text-slate-900">₹{walletBalance.toFixed(2)}</span>
               </div>
               <NavLink
                 to="/billing"
-                className="w-full py-2 px-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-none"
+                className="w-full py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium flex items-center justify-center gap-1.5 transition"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
-                Top-Up Wallet
+                <span>Top-Up Wallet</span>
               </NavLink>
             </div>
           ) : (
             <NavLink
               to="/billing"
               title={`Wallet: ₹${walletBalance.toFixed(2)} - Click to Top-Up`}
-              className="w-9 h-9 mx-auto rounded-xl bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center hover:bg-[#D2E3FC] hover:scale-105 active:scale-95 transition-all duration-200 border border-[#1A73E8]/20 shadow-xs"
+              className="w-9 h-9 mx-auto rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-100 hover:scale-105 active:scale-95 transition-all duration-200 border border-blue-200"
             >
               <Wallet className="w-4 h-4" />
             </NavLink>
@@ -276,16 +276,16 @@ export default function Sidebar({ isMobileOpen, onClose }) {
           {!collapsed ? (
             <button
               onClick={handleLogout}
-              className="w-full py-2 px-3 rounded-full hover:bg-rose-50 text-[#D93025] text-xs font-semibold flex items-center justify-center gap-2 transition border border-transparent hover:border-rose-200"
+              className="w-full py-2 px-3 rounded-lg text-slate-600 hover:text-rose-600 hover:bg-rose-50 text-xs font-medium flex items-center justify-center gap-2 transition"
             >
-              <LogOut className="w-4 h-4 text-[#D93025]" />
+              <LogOut className="w-4 h-4" />
               <span>Sign Out</span>
             </button>
           ) : (
             <button
               onClick={handleLogout}
               title="Sign Out"
-              className="w-9 h-9 mx-auto rounded-xl hover:bg-rose-50 text-[#D93025] flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200"
+              className="w-9 h-9 mx-auto rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200"
             >
               <LogOut className="w-4 h-4" />
             </button>

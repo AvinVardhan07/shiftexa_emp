@@ -137,8 +137,8 @@ export default function Billing() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
       <div>
-        <h1 className="text-2xl font-bold text-[#1F1F1F] tracking-tight">Billing & Usage Wallet</h1>
-        <p className="text-[#5F6368] text-xs sm:text-sm mt-0.5">Manage usage credits, Razorpay payments, GST invoices, and auto-recharge settings.</p>
+        <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">Billing & Usage Wallet</h1>
+        <p className="text-sm text-slate-500 mt-1">Manage usage credits, payments, GST invoices, and auto-recharge settings.</p>
       </div>
 
       {/* Top Cards Grid */}
@@ -146,17 +146,17 @@ export default function Billing() {
         {/* Card 1: Available Wallet Balance */}
         <div className="gemini-card p-6 md:col-span-2 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <span className="text-xs font-semibold text-[#5F6368] uppercase tracking-wider">Available Usage Credit</span>
-            <div className="text-4xl font-bold text-[#1F1F1F] mt-2 font-mono">₹{(wallet.balance || 500).toFixed(2)}</div>
-            <div className="text-xs text-[#5F6368] mt-3 flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-bold font-mono">₹3.50 / min</span>
-              <span>Standard Outbound Voice Rate</span>
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Available Usage Credit</span>
+            <div className="text-3xl font-semibold text-slate-900 mt-2 font-mono">₹{(wallet.balance || 500).toFixed(2)}</div>
+            <div className="text-xs text-slate-500 mt-3 flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-700 font-medium">₹3.50 / min</span>
+              <span>Standard Voice Representative Rate</span>
             </div>
           </div>
 
           <button
             onClick={() => setShowTopUpModal(true)}
-            className="px-6 py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs flex items-center justify-center gap-2 transition shadow-none"
+            className="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs flex items-center justify-center gap-2 transition"
           >
             <Plus className="w-4 h-4" />
             <span>Top-Up Wallet Credits</span>
@@ -166,21 +166,21 @@ export default function Billing() {
         {/* Card 2: Auto-Recharge Card */}
         <div className="gemini-card p-6 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#5F6368] uppercase tracking-wider">Auto-Recharge</span>
-            <RefreshCw className={`w-4 h-4 ${wallet.autoRechargeEnabled ? 'text-[#1A73E8] animate-spin' : 'text-[#5F6368]'}`} />
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Auto-Recharge</span>
+            <RefreshCw className={`w-4 h-4 ${wallet.autoRechargeEnabled ? 'text-blue-600 animate-spin' : 'text-slate-400'}`} />
           </div>
           <div className="my-2">
-            <div className="text-sm font-bold text-[#1F1F1F]">
+            <div className="text-sm font-semibold text-slate-900">
               {wallet.autoRechargeEnabled ? 'ENABLED (₹500 Threshold)' : 'DISABLED'}
             </div>
-            <p className="text-xs text-[#5F6368] mt-1 font-normal">Auto-topup when balance drops below ₹100.</p>
+            <p className="text-xs text-slate-500 mt-1">Auto-topup when balance drops below ₹100.</p>
           </div>
           <button
             onClick={handleToggleAutoRecharge}
-            className={`w-full py-2.5 rounded-full text-xs font-semibold border transition ${
+            className={`w-full py-2 rounded-lg text-xs font-medium border transition ${
               wallet.autoRechargeEnabled
-                ? 'bg-[#E8F0FE] text-[#1A73E8] border-[#D2E3FC] hover:bg-[#D2E3FC]'
-                : 'bg-white text-[#1F1F1F] border-[#747775] hover:bg-[#F8F9FA]'
+                ? 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100'
+                : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
             }`}
           >
             {wallet.autoRechargeEnabled ? 'Disable Auto-Recharge' : 'Enable Auto-Recharge'}
@@ -191,13 +191,13 @@ export default function Billing() {
       {/* Transactions History */}
       <div className="gemini-card p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-bold text-[#1F1F1F]">Transaction History & Tax Invoices</h3>
-          <span className="text-xs text-[#5F6368] font-mono">GST SAC Code: 998313</span>
+          <h3 className="text-base font-semibold text-slate-900">Transaction History & Tax Invoices</h3>
+          <span className="text-xs text-slate-500 font-mono">SAC Code: 998313</span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-[#444746]">
-            <thead className="bg-[#F0F4F9] text-[#1F1F1F] uppercase tracking-wider font-semibold border-b border-[#E3E3E3]">
+          <table className="w-full text-left text-xs text-slate-600">
+            <thead className="bg-slate-50 text-slate-700 uppercase tracking-wider font-semibold border-b border-slate-200">
               <tr>
                 <th className="px-6 py-3.5">Transaction Description</th>
                 <th className="px-6 py-3.5">Type</th>
@@ -206,28 +206,26 @@ export default function Billing() {
                 <th className="px-6 py-3.5 text-right">Invoice</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E3E3E3]">
+            <tbody className="divide-y divide-slate-100">
               {transactions.map((tx) => (
-                <tr key={tx._id} className="hover:bg-[#F8F9FA] transition">
-                  <td className="px-6 py-4 font-semibold text-[#1F1F1F]">{tx.description}</td>
+                <tr key={tx._id} className="hover:bg-slate-50/80 transition">
+                  <td className="px-6 py-4 font-medium text-slate-900">{tx.description}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono border ${
-                      tx.amount > 0 ? 'bg-[#E8F0FE] text-[#1A73E8] border-[#D2E3FC]' : 'bg-[#F0F4F9] text-[#5F6368] border-[#E3E3E3]'
-                    }`}>
+                    <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
                       {tx.type}
                     </span>
                   </td>
-                  <td className={`px-6 py-4 text-right font-mono font-bold ${tx.amount > 0 ? 'text-[#137333]' : 'text-[#1F1F1F]'}`}>
+                  <td className={`px-6 py-4 text-right font-mono font-medium ${tx.amount > 0 ? 'text-emerald-700' : 'text-slate-900'}`}>
                     {tx.amount > 0 ? `+₹${tx.amount.toFixed(2)}` : `-₹${Math.abs(tx.amount).toFixed(2)}`}
                   </td>
-                  <td className="px-6 py-4 text-right font-mono text-[#1F1F1F]">₹{tx.balanceAfter?.toFixed(2)}</td>
+                  <td className="px-6 py-4 text-right font-mono text-slate-700">₹{tx.balanceAfter?.toFixed(2)}</td>
                   <td className="px-6 py-4 text-right">
                     {tx.amount > 0 && (
                       <button
                         onClick={() => fetchGSTInvoice(tx._id)}
-                        className="px-3 py-1 rounded-full bg-[#E8F0FE] hover:bg-[#1A73E8] text-[#1A73E8] hover:text-white text-[11px] font-semibold transition inline-flex items-center gap-1 border border-[#D2E3FC]"
+                        className="px-2.5 py-1 rounded-md bg-white hover:bg-slate-100 text-slate-700 text-xs font-medium transition inline-flex items-center gap-1.5 border border-slate-200"
                       >
-                        <FileText className="w-3.5 h-3.5" />
+                        <FileText className="w-3.5 h-3.5 text-slate-500" />
                         <span>GST Invoice</span>
                       </button>
                     )}
@@ -240,10 +238,10 @@ export default function Billing() {
       </div>
 
       {/* Razorpay Top-Up Modal */}
-      <Modal isOpen={showTopUpModal} onClose={() => setShowTopUpModal(false)} title="Razorpay Usage Top-Up">
+      <Modal isOpen={showTopUpModal} onClose={() => setShowTopUpModal(false)} title="Usage Credit Top-Up">
         <form onSubmit={handleTopUpSubmit} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1.5">Select Credit Top-Up Amount (INR)</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">Select Top-Up Amount (INR)</label>
             <div className="mb-3 flex justify-center sm:justify-start">
               <JellyRadio
                 items={[
@@ -253,10 +251,10 @@ export default function Billing() {
                 ]}
                 value={String(topUpAmount)}
                 onChange={(val) => setTopUpAmount(Number(val))}
-                activeColor="#1A73E8"
+                activeColor="#2563EB"
                 activeTextColor="#FFFFFF"
-                chipColor="#F0F4F9"
-                textColor="#1F1F1F"
+                chipColor="#F1F5F9"
+                textColor="#334155"
                 size="md"
               />
             </div>
@@ -266,32 +264,32 @@ export default function Billing() {
               onChange={(e) => setTopUpAmount(Number(e.target.value))}
               required
               min="100"
-              className="w-full px-4 py-2.5 rounded-xl border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] text-xs text-[#444746] space-y-1.5 font-mono">
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1.5">
             <div className="flex justify-between">
               <span>Credit Amount:</span>
-              <strong className="text-[#1F1F1F]">₹{topUpAmount.toFixed(2)}</strong>
+              <span className="font-semibold text-slate-900">₹{topUpAmount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span>18% GST (CGST 9% + SGST 9%):</span>
-              <span className="text-[#1A73E8]">+₹{gstTax}</span>
+              <span className="text-slate-700">+₹{gstTax}</span>
             </div>
-            <div className="flex justify-between pt-1.5 border-t border-[#E3E3E3] font-bold text-[#1F1F1F] text-sm">
+            <div className="flex justify-between pt-1.5 border-t border-slate-200 font-semibold text-slate-900 text-sm">
               <span>Total Payable:</span>
-              <span className="text-[#1A73E8]">₹{totalPayable}</span>
+              <span>₹{totalPayable}</span>
             </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs transition flex items-center justify-center gap-2"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition flex items-center justify-center gap-2"
           >
             <CreditCard className="w-4 h-4" />
-            <span>{loading ? 'Processing Payment...' : `Proceed to Pay ₹${totalPayable} via Razorpay`}</span>
+            <span>{loading ? 'Processing Payment...' : `Proceed to Pay ₹${totalPayable}`}</span>
           </button>
         </form>
       </Modal>
@@ -300,21 +298,21 @@ export default function Billing() {
       <Modal isOpen={showInvoiceModal} onClose={() => setShowInvoiceModal(false)} title="GST Tax Invoice Receipt">
         {selectedInvoice && (
           <div className="space-y-4 text-xs font-sans">
-            <div className="p-4 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] space-y-2">
-              <div className="flex justify-between items-center border-b border-[#E3E3E3] pb-2">
-                <span className="font-bold text-[#1F1F1F] text-sm">{selectedInvoice.seller?.name || 'SHIFTEXA AI WORKFORCE PVT LTD'}</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-mono font-bold border border-[#D2E3FC] text-[11px]">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                <span className="font-semibold text-slate-900 text-sm">{selectedInvoice.seller?.name || 'SHIFTEXA AI WORKFORCE PVT LTD'}</span>
+                <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-700 font-mono text-[11px] font-medium">
                   {selectedInvoice.invoiceNumber || 'INV-SHIF-2026-001'}
                 </span>
               </div>
-              <div className="text-[11px] text-[#5F6368]">
-                GSTIN: <strong>{selectedInvoice.seller?.gstin || '36AABCX9981K1Z5'}</strong> • SAC Code: <strong>998313</strong>
+              <div className="text-xs text-slate-500">
+                GSTIN: <span className="font-mono text-slate-800">{selectedInvoice.seller?.gstin || '36AABCX9981K1Z5'}</span> • SAC Code: <span className="font-mono text-slate-800">998313</span>
               </div>
             </div>
 
-            <div className="border border-[#E3E3E3] rounded-2xl overflow-hidden">
-              <table className="w-full text-left text-xs text-[#444746]">
-                <thead className="bg-[#F0F4F9] font-semibold border-b border-[#E3E3E3]">
+            <div className="border border-slate-200 rounded-xl overflow-hidden">
+              <table className="w-full text-left text-xs text-slate-600">
+                <thead className="bg-slate-50 font-semibold border-b border-slate-200 text-slate-700">
                   <tr>
                     <th className="p-3">Description</th>
                     <th className="p-3 text-right">Subtotal</th>
@@ -324,10 +322,10 @@ export default function Billing() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="p-3 font-semibold text-[#1F1F1F]">SHIFTEXA AI Voice Usage Credits Top-Up</td>
+                    <td className="p-3 font-medium text-slate-900">SHIFTEXA AI Voice Usage Credits Top-Up</td>
                     <td className="p-3 text-right font-mono">₹{(selectedInvoice.summary?.subtotal || 500).toFixed(2)}</td>
-                    <td className="p-3 text-right font-mono text-[#1A73E8]">₹{((selectedInvoice.summary?.totalCGST || 45) + (selectedInvoice.summary?.totalSGST || 45)).toFixed(2)}</td>
-                    <td className="p-3 text-right font-mono font-bold text-[#1F1F1F]">₹{(selectedInvoice.summary?.grandTotal || 590).toFixed(2)}</td>
+                    <td className="p-3 text-right font-mono">₹{((selectedInvoice.summary?.totalCGST || 45) + (selectedInvoice.summary?.totalSGST || 45)).toFixed(2)}</td>
+                    <td className="p-3 text-right font-mono font-semibold text-slate-900">₹{(selectedInvoice.summary?.grandTotal || 590).toFixed(2)}</td>
                   </tr>
                 </tbody>
               </table>
@@ -335,10 +333,10 @@ export default function Billing() {
 
             <button
               onClick={() => window.print()}
-              className="w-full py-3 rounded-full bg-[#1F1F1F] hover:bg-[#303030] text-white font-semibold text-xs transition flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs transition flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
-              <span>Download GST Invoice PDF</span>
+              <span>Download Invoice PDF</span>
             </button>
           </div>
         )}

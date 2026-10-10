@@ -86,34 +86,34 @@ export default function Settings() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto font-sans">
       <div>
-        <h1 className="text-2xl font-bold text-[#1F1F1F] tracking-tight">Organization & RBAC Settings</h1>
-        <p className="text-[#5F6368] text-xs sm:text-sm mt-0.5">Manage business profile, team member roles, and security API keys.</p>
+        <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">Organization & Team Settings</h1>
+        <p className="text-sm text-slate-500 mt-1">Manage business profile, team member permissions, and security API keys.</p>
       </div>
 
       {/* Business Profile Card */}
       <div className="gemini-card p-6 space-y-4">
-        <h3 className="text-base font-bold text-[#1F1F1F] flex items-center gap-2">
-          <Building2 className="w-4 h-4 text-[#1A73E8]" />
+        <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+          <Building2 className="w-4 h-4 text-slate-500" />
           <span>Business Profile</span>
         </h3>
 
         <div className="grid md:grid-cols-2 gap-4 text-xs">
           <div>
-            <label className="block font-semibold text-[#1F1F1F] mb-1.5">Company / Organization Name</label>
+            <label className="block font-semibold text-slate-700 mb-1.5">Company / Organization Name</label>
             <input
               type="text"
               readOnly
               value={organization?.name || 'ABC Properties'}
-              className="w-full px-4 py-2.5 rounded-xl border border-[#E3E3E3] text-[#1F1F1F] bg-[#F0F4F9] font-medium"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-slate-900 bg-slate-50 font-medium"
             />
           </div>
           <div>
-            <label className="block font-semibold text-[#1F1F1F] mb-1.5">Target Business Industry</label>
+            <label className="block font-semibold text-slate-700 mb-1.5">Target Business Industry</label>
             <input
               type="text"
               readOnly
               value="Real Estate Sales & Voice Automation"
-              className="w-full px-4 py-2.5 rounded-xl border border-[#E3E3E3] text-[#1F1F1F] bg-[#F0F4F9] font-medium"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-slate-900 bg-slate-50 font-medium"
             />
           </div>
         </div>
@@ -123,16 +123,16 @@ export default function Settings() {
       <div className="gemini-card p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-base font-bold text-[#1F1F1F] flex items-center gap-2">
-              <Users className="w-4 h-4 text-[#1A73E8]" />
-              <span>Team Members & Role Access Control (RBAC)</span>
+            <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+              <Users className="w-4 h-4 text-slate-500" />
+              <span>Team Members & Access Roles</span>
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">Manage organization members and assigned role permissions.</p>
+            <p className="text-xs text-slate-500 mt-0.5">Manage organization members and assigned role permissions.</p>
           </div>
 
           <button
             onClick={() => setShowInviteModal(true)}
-            className="px-4 py-2 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs transition shadow-none flex items-center gap-1.5 shrink-0"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition flex items-center gap-1.5 shrink-0"
           >
             <UserPlus className="w-4 h-4" />
             <span>Invite Team Member</span>
@@ -140,8 +140,8 @@ export default function Settings() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-[#444746]">
-            <thead className="bg-[#F0F4F9] text-[#1F1F1F] uppercase tracking-wider font-semibold border-b border-[#E3E3E3]">
+          <table className="w-full text-left text-xs text-slate-600">
+            <thead className="bg-slate-50 text-slate-700 uppercase tracking-wider font-semibold border-b border-slate-200">
               <tr>
                 <th className="px-4 py-3">Member Name</th>
                 <th className="px-4 py-3">Email Address</th>
@@ -149,21 +149,19 @@ export default function Settings() {
                 <th className="px-4 py-3 text-right">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E3E3E3]">
+            <tbody className="divide-y divide-slate-100">
               {teamMembers.map((m) => (
-                <tr key={m.membershipId} className="hover:bg-[#F8F9FA] transition">
-                  <td className="px-4 py-3.5 font-bold text-[#1F1F1F]">{m.user?.name || 'Team Member'}</td>
-                  <td className="px-4 py-3.5 font-mono text-[#1F1F1F]">{m.user?.email}</td>
+                <tr key={m.membershipId} className="hover:bg-slate-50/80 transition">
+                  <td className="px-4 py-3.5 font-medium text-slate-900">{m.user?.name || 'Team Member'}</td>
+                  <td className="px-4 py-3.5 font-mono text-slate-700">{m.user?.email}</td>
                   <td className="px-4 py-3.5">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono border ${
-                      m.role === 'OWNER' ? 'bg-[#E8F0FE] text-[#1A73E8] border-[#D2E3FC]' : 'bg-[#F0F4F9] text-[#5F6368] border-[#E3E3E3]'
-                    }`}>
+                    <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
                       {m.role}
                     </span>
                   </td>
                   <td className="px-4 py-3.5 text-right">
-                    <span className="text-[#137333] font-bold text-[11px] flex items-center gap-1.5 justify-end font-mono">
-                      <span className="w-2 h-2 rounded-full bg-[#137333]"></span> ACTIVE
+                    <span className="text-emerald-700 font-medium text-xs flex items-center gap-1.5 justify-end">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ACTIVE
                     </span>
                   </td>
                 </tr>
@@ -175,28 +173,28 @@ export default function Settings() {
 
       {/* API Credentials */}
       <div className="gemini-card p-6 space-y-4">
-        <h3 className="text-base font-bold text-[#1F1F1F] flex items-center gap-2">
-          <Key className="w-4 h-4 text-[#1A73E8]" />
+        <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+          <Key className="w-4 h-4 text-slate-500" />
           <span>Live Webhook API Key</span>
         </h3>
-        <div className="p-4 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] font-mono text-xs text-[#1F1F1F] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <span>shiftexa_live_abcproperties_2026_key998313</span>
-          <span className="text-[10px] px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] font-bold border border-[#D2E3FC] shrink-0">
+          <span className="text-xs px-2.5 py-0.5 rounded-md bg-white text-slate-700 font-medium border border-slate-200 shrink-0">
             ACTIVE & SECURED
           </span>
         </div>
       </div>
 
       {/* Account Security & Session Logout */}
-      <div className="gemini-card p-6 space-y-4 border-rose-200 bg-rose-50/20">
-        <h3 className="text-base font-bold text-[#1F1F1F] flex items-center gap-2">
-          <Lock className="w-4 h-4 text-[#D93025]" />
+      <div className="gemini-card p-6 space-y-4">
+        <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-slate-500" />
           <span>Account Security & Session</span>
         </h3>
-        <p className="text-xs text-[#5F6368]">Sign out of your active Shiftexa dashboard session on this browser.</p>
+        <p className="text-xs text-slate-500">Sign out of your active Shiftexa dashboard session on this browser.</p>
         <button
           onClick={handleLogout}
-          className="px-6 py-2.5 rounded-full bg-[#D93025] hover:bg-[#B31412] text-white font-semibold text-xs flex items-center gap-2 transition"
+          className="px-4 py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-medium text-xs flex items-center gap-2 transition"
         >
           <LogOut className="w-4 h-4" />
           <span>Sign Out of Dashboard</span>
@@ -207,33 +205,33 @@ export default function Settings() {
       <Modal isOpen={showInviteModal} onClose={() => setShowInviteModal(false)} title="Invite Team Member">
         <form onSubmit={handleInviteSubmit} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Full Name</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
             <input
               type="text"
               value={inviteName}
               onChange={(e) => setInviteName(e.target.value)}
               required
               placeholder="e.g. Ananya Rao"
-              className="w-full px-4 py-2.5 rounded-xl border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Email Address</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
             <input
               type="email"
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
               required
               placeholder="ananya@abcproperties.com"
-              className="w-full px-4 py-2.5 rounded-xl border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Assigned Role</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Assigned Role</label>
             <select
               value={inviteRole}
               onChange={(e) => setInviteRole(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="MEMBER">MEMBER (View & Lead Management)</option>
               <option value="ADMIN">ADMIN (Full Campaign & Employee Edit Access)</option>
@@ -242,7 +240,7 @@ export default function Settings() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs transition"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition"
           >
             {loading ? 'Sending Invitation...' : 'Send Team Invitation'}
           </button>

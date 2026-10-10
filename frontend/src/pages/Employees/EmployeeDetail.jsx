@@ -260,37 +260,37 @@ export default function EmployeeDetail() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
       {/* Header Banner */}
-      <div className="p-7 rounded-[28px] bg-[#F0F4F9] border border-[#E3E3E3] flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="p-6 rounded-xl bg-white border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-[#E8F0FE] flex items-center justify-center font-bold text-2xl text-[#1A73E8] shrink-0">
+          <div className="w-14 h-14 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center font-semibold text-xl border border-slate-200 shrink-0">
             {employee.name.charAt(0)}
           </div>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold text-[#1F1F1F]">{employee.name}</h1>
+              <h1 className="text-xl font-semibold text-slate-900">{employee.name}</h1>
               <Badge status={employee.status} />
             </div>
-            <p className="text-xs text-[#1A73E8] font-semibold mt-0.5">Real Estate Sales Voice Representative</p>
-            <div className="flex flex-wrap items-center gap-4 text-xs text-[#5F6368] mt-1 font-mono">
-              <span>Phone: <strong className="text-[#1F1F1F]">{employee.phoneNumber}</strong></span>
-              <span>Rate: <strong className="text-[#1A73E8]">₹3.50/min</strong></span>
-              <span>Version: <strong className="text-[#1F1F1F]">v{employee.currentDraftVersion}</strong></span>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Real Estate Sales Voice Representative</p>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 mt-1">
+              <span>Phone: <span className="font-mono text-slate-900 font-medium">{employee.phoneNumber}</span></span>
+              <span>Rate: <span className="text-slate-900 font-medium">₹3.50/min</span></span>
+              <span>Release: <span className="text-slate-900 font-medium">v{employee.currentDraftVersion}</span></span>
             </div>
           </div>
         </div>
 
         {/* Status indicator */}
-        <div className="px-4 py-3 rounded-[20px] bg-white border border-[#E3E3E3] flex items-center gap-3 shadow-none">
-          <ShieldCheck className="w-5 h-5 text-[#1A73E8] shrink-0" />
+        <div className="px-3.5 py-2.5 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+          <ShieldCheck className="w-5 h-5 text-slate-500 shrink-0" />
           <div className="text-xs">
-            <div className="font-bold text-[#1F1F1F]">System Ready</div>
-            <div className="text-[#5F6368] text-[11px] font-mono">Direct Dispatch Enabled</div>
+            <div className="font-semibold text-slate-900">System Ready</div>
+            <div className="text-slate-500 text-[11px]">Direct Dispatch Line Active</div>
           </div>
         </div>
       </div>
 
       {/* Tabs Header */}
-      <div className="border-b border-[#E3E3E3] pb-3 overflow-x-auto whitespace-nowrap scrollbar-none">
+      <div className="border-b border-slate-200 pb-3 overflow-x-auto whitespace-nowrap scrollbar-none">
         <JellyRadio
           items={[
             { value: 'STUDIO', label: 'Call Simulation', icon: <PhoneCall className="w-3.5 h-3.5" /> },
@@ -300,10 +300,10 @@ export default function EmployeeDetail() {
           ]}
           value={activeTab}
           onChange={(tabId) => setActiveTab(tabId)}
-          activeColor="#1A73E8"
+          activeColor="#2563EB"
           activeTextColor="#FFFFFF"
-          chipColor="#F0F4F9"
-          textColor="#444746"
+          chipColor="#F1F5F9"
+          textColor="#334155"
           size="md"
         />
       </div>
@@ -314,18 +314,18 @@ export default function EmployeeDetail() {
           {/* Left Column: Call Console */}
           <div className="lg:col-span-2 gemini-card p-6 flex flex-col justify-between min-h-[500px]">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-[#E3E3E3] pb-3">
+              <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
                 <div className="flex items-center gap-2">
-                  <Volume2 className="w-4 h-4 text-[#1A73E8]" />
-                  <h3 className="text-sm font-bold text-[#1F1F1F]">Voice Simulation Console</h3>
+                  <Volume2 className="w-4 h-4 text-slate-500" />
+                  <h3 className="text-sm font-semibold text-slate-900">Voice Simulation Console</h3>
                 </div>
                 {callActive ? (
-                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-xs font-semibold border border-[#1A73E8]/20">
-                    <span className="w-2 h-2 rounded-full bg-[#1A73E8] animate-ping"></span>
+                  <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                     Call Active
                   </span>
                 ) : (
-                  <span className="text-xs text-[#5F6368] font-mono">Status: Standby</span>
+                  <span className="text-xs text-slate-500">Status: Standby</span>
                 )}
               </div>
 
@@ -336,18 +336,18 @@ export default function EmployeeDetail() {
 
               {/* Tool Execution Alert Notification */}
               {callToolAlert && (
-                <div className="mb-4 p-3.5 rounded-[16px] bg-[#E8F0FE] border border-[#1A73E8]/30 text-[#1F1F1F] text-xs font-semibold flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-[#1A73E8] shrink-0" />
+                <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>{callToolAlert}</span>
                 </div>
               )}
 
               {/* Transcript Stream Box */}
-              <div className="p-4 rounded-[20px] bg-[#F0F4F9] border border-[#E3E3E3] h-64 overflow-y-auto space-y-3 font-sans">
+              <div className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 h-72 overflow-y-auto space-y-3 font-sans">
                 {transcript.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center text-[#5F6368] text-xs space-y-2">
-                    <PhoneCall className="w-6 h-6 text-[#747775]" />
-                    <span>Click "Start Test Call" to begin voice simulation.</span>
+                  <div className="h-full flex flex-col items-center justify-center text-slate-400 text-xs space-y-2">
+                    <PhoneCall className="w-6 h-6 text-slate-300" />
+                    <span>Click "Start Test Call Studio" to begin interactive voice simulation.</span>
                   </div>
                 ) : (
                   transcript.map((t, idx) => (
@@ -355,12 +355,12 @@ export default function EmployeeDetail() {
                       key={idx}
                       className={`flex flex-col ${t.speaker === 'Meera' ? 'items-start' : 'items-end'}`}
                     >
-                      <span className="text-[10px] text-[#5F6368] mb-0.5 font-mono">{t.speaker}</span>
+                      <span className="text-[10px] text-slate-400 mb-0.5 font-medium">{t.speaker}</span>
                       <div
-                        className={`max-w-[85%] px-4 py-2.5 rounded-[18px] text-xs leading-relaxed ${
+                        className={`max-w-[85%] px-3.5 py-2.5 rounded-lg text-xs leading-relaxed font-normal ${
                           t.speaker === 'Meera'
-                            ? 'bg-[#1A73E8] text-white'
-                            : 'bg-white text-[#1F1F1F] border border-[#E3E3E3] shadow-none'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white text-slate-900 border border-slate-200 shadow-xs'
                         }`}
                       >
                         {t.text}
@@ -372,20 +372,20 @@ export default function EmployeeDetail() {
             </div>
 
             {/* Controls & Quick Prompts */}
-            <div className="mt-4 pt-4 border-t border-[#E3E3E3] space-y-3">
+            <div className="mt-4 pt-4 border-t border-slate-200 space-y-3">
               <div className="flex flex-wrap gap-2 text-xs">
-                <span className="text-[#5F6368] text-[11px] self-center font-medium">Quick Test Inputs:</span>
+                <span className="text-slate-500 text-xs self-center font-medium">Quick Prompts:</span>
                 <button
                   onClick={() => handleSendSpeech("Price konchem ekkuva anipisthundi")}
                   disabled={!callActive}
-                  className="px-3 py-1 rounded-full bg-white hover:bg-[#F8F9FA] border border-[#747775] text-[#1F1F1F] text-xs transition disabled:opacity-50"
+                  className="px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs transition disabled:opacity-50"
                 >
                   "Price is a bit high"
                 </button>
                 <button
                   onClick={() => handleSendSpeech("Sunday comfortable ga untundi site visit ki")}
                   disabled={!callActive}
-                  className="px-3 py-1 rounded-full bg-white hover:bg-[#F8F9FA] border border-[#747775] text-[#1F1F1F] text-xs transition disabled:opacity-50"
+                  className="px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs transition disabled:opacity-50"
                 >
                   "Sunday site visit okay"
                 </button>
@@ -395,7 +395,7 @@ export default function EmployeeDetail() {
                 {!callActive ? (
                   <button
                     onClick={handleStartTestCall}
-                    className="btn-gemini-primary w-full py-3 text-xs font-semibold flex items-center justify-center gap-2"
+                    className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium flex items-center justify-center gap-2 transition"
                   >
                     <Play className="w-4 h-4 fill-current" />
                     <span>Start Test Call Studio</span>
@@ -405,8 +405,8 @@ export default function EmployeeDetail() {
                     <button
                       onClick={toggleListening}
                       title={isListening ? "Listening... click to stop" : "Click to speak via Microphone"}
-                      className={`p-3 rounded-full text-white transition flex items-center justify-center ${
-                        isListening ? 'bg-[#D93025] animate-pulse' : 'bg-[#1F1F1F] hover:bg-[#303030]'
+                      className={`p-2.5 rounded-lg text-white transition flex items-center justify-center ${
+                        isListening ? 'bg-rose-600 animate-pulse' : 'bg-slate-900 hover:bg-slate-800'
                       }`}
                     >
                       {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
@@ -418,19 +418,19 @@ export default function EmployeeDetail() {
                       onChange={(e) => setUserInput(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSendSpeech()}
                       placeholder={isListening ? "Listening to your voice..." : "Type or speak in Telugu/English..."}
-                      className="flex-1 px-4 py-2.5 rounded-[12px] border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+                      className="flex-1 px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                     />
 
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleSendSpeech()}
-                        className="btn-gemini-primary p-3 rounded-full flex-1 sm:flex-initial flex items-center justify-center"
+                        className="p-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition"
                       >
                         <Send className="w-4 h-4" />
                       </button>
                       <button
                         onClick={handleEndCall}
-                        className="px-5 py-2.5 rounded-full bg-[#1F1F1F] hover:bg-[#303030] text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 flex-1 sm:flex-initial"
+                        className="px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition flex items-center justify-center gap-1.5"
                       >
                         <Square className="w-4 h-4 fill-current" />
                         <span>End</span>
@@ -445,41 +445,41 @@ export default function EmployeeDetail() {
           {/* Right Column: Lead Memory */}
           <div className="space-y-6">
             <div className="gemini-card p-6">
-              <h4 className="text-sm font-bold text-[#1F1F1F] mb-3">Active Lead Context</h4>
+              <h4 className="text-sm font-semibold text-slate-900 mb-3">Active Lead Context</h4>
               <div className="space-y-2 text-xs">
-                <div className="p-3 rounded-[12px] bg-[#F0F4F9] border border-[#E3E3E3] flex justify-between items-center">
-                  <span className="text-[#5F6368]">Lead Name</span>
-                  <span className="font-bold text-[#1F1F1F]">Rahul Sharma</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 flex justify-between items-center">
+                  <span className="text-slate-500">Lead Name</span>
+                  <span className="font-semibold text-slate-900">Rahul Sharma</span>
                 </div>
-                <div className="p-3 rounded-[12px] bg-[#F0F4F9] border border-[#E3E3E3] flex justify-between items-center">
-                  <span className="text-[#5F6368]">Phone</span>
-                  <span className="font-mono text-[#1F1F1F] font-semibold">+91 98765 43210</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 flex justify-between items-center">
+                  <span className="text-slate-500">Phone</span>
+                  <span className="font-mono text-slate-900 font-medium">+91 98765 43210</span>
                 </div>
-                <div className="p-3 rounded-[12px] bg-[#F0F4F9] border border-[#E3E3E3] flex justify-between items-center">
-                  <span className="text-[#5F6368]">Target Project</span>
-                  <span className="text-[#1A73E8] font-bold">Gachibowli Heights</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 flex justify-between items-center">
+                  <span className="text-slate-500">Target Project</span>
+                  <span className="font-medium text-slate-900">Gachibowli Heights</span>
                 </div>
-                <div className="p-3 rounded-[12px] bg-[#F0F4F9] border border-[#E3E3E3] flex justify-between items-center">
-                  <span className="text-[#5F6368]">Budget Limit</span>
-                  <span className="text-[#1F1F1F] font-bold font-mono">₹1.5 Crore</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 flex justify-between items-center">
+                  <span className="text-slate-500">Budget Limit</span>
+                  <span className="font-medium text-slate-900">₹1.5 Crore</span>
                 </div>
               </div>
             </div>
 
             <div className="gemini-card p-6">
-              <h4 className="text-sm font-bold text-[#1F1F1F] mb-3">Call Diagnostic Metrics</h4>
-              <div className="space-y-2.5 text-xs text-[#5F6368]">
+              <h4 className="text-sm font-semibold text-slate-900 mb-3">Diagnostic Session</h4>
+              <div className="space-y-2.5 text-xs text-slate-600">
                 <div className="flex justify-between">
                   <span>Duration:</span>
-                  <strong className="text-[#1F1F1F]">2m 18s</strong>
+                  <strong className="text-slate-900 font-medium">2m 18s</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span>Billed Minutes:</span>
-                  <strong className="text-[#1F1F1F] font-mono">3 Mins</strong>
+                  <span>Billed Units:</span>
+                  <strong className="text-slate-900 font-medium">3 Mins</strong>
                 </div>
-                <div className="flex justify-between pt-2 border-t border-[#E3E3E3] font-bold text-sm">
-                  <span className="text-[#1F1F1F]">Cost:</span>
-                  <span className="text-[#1A73E8] font-mono">₹10.50</span>
+                <div className="flex justify-between pt-2 border-t border-slate-200 text-sm">
+                  <span className="text-slate-700">Cost:</span>
+                  <span className="font-semibold text-slate-900">₹10.50</span>
                 </div>
               </div>
             </div>
@@ -492,12 +492,12 @@ export default function EmployeeDetail() {
         <div className="space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-bold text-[#1F1F1F]">Knowledge Base & Inventory</h3>
-              <p className="text-xs text-[#5F6368]">Manage real estate project listings, specs, and price parameters.</p>
+              <h3 className="text-lg font-semibold text-slate-900">Knowledge Base & Inventory</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Manage real estate project listings, specs, and price parameters.</p>
             </div>
             <button
               onClick={() => setShowPropertyModal(true)}
-              className="btn-gemini-primary px-5 py-2.5 text-xs font-semibold flex items-center gap-1.5 self-start md:self-auto"
+              className="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium flex items-center gap-1.5 self-start md:self-auto transition"
             >
               <Plus className="w-4 h-4" />
               <span>Add Property Configuration</span>
@@ -508,16 +508,16 @@ export default function EmployeeDetail() {
             {knowledgeBase?.properties?.map((prop, idx) => (
               <div key={idx} className="gemini-card p-6 space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-base font-bold text-[#1F1F1F]">{prop.title}</h4>
-                  <span className="px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-xs font-mono font-bold">
+                  <h4 className="text-base font-semibold text-slate-900">{prop.title}</h4>
+                  <span className="px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold">
                     {prop.priceStarting}
                   </span>
                 </div>
-                <div className="text-xs text-[#5F6368] font-medium">{prop.location} • {prop.configurationType}</div>
-                <p className="text-xs text-[#444746] leading-relaxed font-normal">{prop.description}</p>
+                <div className="text-xs text-slate-500 font-medium">{prop.location} • {prop.configurationType}</div>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">{prop.description}</p>
                 <div className="flex flex-wrap gap-1.5 pt-2">
                   {prop.amenities?.map((am, i) => (
-                    <span key={i} className="text-[10px] px-2.5 py-1 rounded-full bg-[#F0F4F9] text-[#1F1F1F] border border-[#E3E3E3] font-medium">
+                    <span key={i} className="text-[11px] px-2 py-0.5 rounded bg-slate-50 text-slate-600 border border-slate-200">
                       {am}
                     </span>
                   ))}
@@ -531,22 +531,22 @@ export default function EmployeeDetail() {
       {/* TAB 3: VOICE */}
       {activeTab === 'VOICE' && (
         <div className="gemini-card p-6 max-w-2xl space-y-4">
-          <h3 className="text-base font-bold text-[#1F1F1F]">Language & Voice Dialect Configuration</h3>
+          <h3 className="text-base font-semibold text-slate-900">Language & Voice Dialect Configuration</h3>
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Language Dialect</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Language Dialect</label>
             <input
               type="text"
               readOnly
               value="Telugu + English (Hyderabad)"
-              className="w-full px-4 py-2.5 rounded-[12px] border border-[#E3E3E3] text-xs text-[#1F1F1F] bg-[#F0F4F9] font-mono"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-xs text-slate-900 bg-slate-50 font-medium"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Greeting Template</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Greeting Template</label>
             <textarea
               rows={3}
               defaultValue={employee?.configuration?.greeting}
-              className="w-full p-3.5 rounded-[12px] border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full p-3.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
@@ -556,14 +556,14 @@ export default function EmployeeDetail() {
       {activeTab === 'VERSIONS' && (
         <div className="gemini-card p-6 max-w-3xl space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-bold text-[#1F1F1F]">Version Control & Release History</h3>
-            <span className="text-xs font-semibold text-[#1A73E8]">Active Release: v1</span>
+            <h3 className="text-base font-semibold text-slate-900">Version Control & Release History</h3>
+            <span className="text-xs font-semibold text-slate-600">Active Release: v1</span>
           </div>
 
-          <div className="p-4 rounded-[20px] bg-[#F0F4F9] border border-[#E3E3E3] flex items-center justify-between text-xs">
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
             <div>
-              <div className="font-bold text-[#1F1F1F]">Version 1 (Production Live)</div>
-              <div className="text-[#5F6368] text-[11px] font-normal">Hyderabad Telugu+English real estate consultative conversational model</div>
+              <div className="font-semibold text-slate-900">Version 1 (Production Live)</div>
+              <div className="text-slate-500 text-xs font-normal mt-0.5">Hyderabad Telugu+English real estate consultative conversational model</div>
             </div>
             <Badge status="LIVE" />
           </div>
@@ -578,39 +578,39 @@ export default function EmployeeDetail() {
       >
         <form onSubmit={handleAddProperty} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Project Title</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Project Title</label>
             <input
               type="text"
               value={propTitle}
               onChange={(e) => setPropTitle(e.target.value)}
               required
               placeholder="e.g. Hitec City Residency"
-              className="w-full px-4 py-2.5 rounded-[12px] border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Starting Price</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Starting Price</label>
               <input
                 type="text"
                 value={propPrice}
                 onChange={(e) => setPropPrice(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-[12px] border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Configuration</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Configuration</label>
               <input
                 type="text"
                 value={propConfig}
                 onChange={(e) => setPropConfig(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-[12px] border border-[#747775] text-xs text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8]"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
           <button
             type="submit"
-            className="btn-gemini-primary w-full py-3 text-xs font-semibold"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium transition"
           >
             Add Property to Knowledge Base
           </button>

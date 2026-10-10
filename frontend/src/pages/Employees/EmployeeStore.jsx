@@ -109,8 +109,8 @@ export default function EmployeeStore() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1F1F1F] tracking-tight">Browse <span className="text-[#1A73E8]">Workforce Solutions</span></h1>
-          <p className="text-[#5F6368] text-xs md:text-sm mt-1 font-normal">Select pre-configured digital representatives for your business workflows.</p>
+          <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">Voice Representatives</h1>
+          <p className="text-sm text-slate-500 mt-1">Pre-configured conversational voice agents tailored for enterprise workflows.</p>
         </div>
 
         {/* Category Filters */}
@@ -120,10 +120,10 @@ export default function EmployeeStore() {
             value={selectedCategory}
             onChange={(cat) => setSelectedCategory(cat)}
             size="sm"
-            activeColor="#1A73E8"
+            activeColor="#2563EB"
             activeTextColor="#FFFFFF"
-            chipColor="#F0F4F9"
-            textColor="#1F1F1F"
+            chipColor="#F1F5F9"
+            textColor="#334155"
           />
         </div>
       </div>
@@ -136,33 +136,33 @@ export default function EmployeeStore() {
             className="gemini-card p-6 flex flex-col justify-between relative group"
           >
             {tmpl.isFeatured && (
-              <span className="absolute top-5 right-5 px-2.5 py-0.5 rounded-full bg-[#E8F0FE] text-[#1A73E8] text-[9px] font-bold">
-                FEATURED V1
+              <span className="absolute top-5 right-5 px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-semibold tracking-wide">
+                FEATURED
               </span>
             )}
 
             <div>
               <div className="flex items-center gap-3.5 mb-4">
-                <div className="w-12 h-12 rounded-full bg-[#E8F0FE] flex items-center justify-center text-[#1A73E8] font-bold text-lg">
+                <div className="w-11 h-11 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center font-semibold text-base border border-slate-200">
                   {tmpl.name.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#1F1F1F] group-hover:text-[#1A73E8] transition">{tmpl.name}</h3>
-                  <p className="text-[11px] text-[#1A73E8] font-semibold">{tmpl.title}</p>
-                  <span className="inline-block text-[10px] font-mono font-semibold text-[#1A73E8] bg-[#E8F0FE] px-2 py-0.5 rounded-full mt-1">
-                    ₹{tmpl.ratePerMin}/min
+                  <h3 className="text-base font-semibold text-slate-900">{tmpl.name}</h3>
+                  <p className="text-xs text-slate-500 font-medium">{tmpl.title}</p>
+                  <span className="inline-block text-[11px] font-medium text-slate-600 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-md mt-1">
+                    ₹{tmpl.ratePerMin.toFixed(2)}/min
                   </span>
                 </div>
               </div>
 
-              <p className="text-xs text-[#5F6368] leading-relaxed mb-4 font-normal">{tmpl.description}</p>
+              <p className="text-xs text-slate-600 leading-relaxed mb-5 font-normal">{tmpl.description}</p>
 
               {/* Capabilities */}
               <div className="space-y-2 mb-6">
-                <span className="text-[10px] font-semibold text-[#5F6368] uppercase tracking-wider block">Key Features</span>
+                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Key Capabilities</span>
                 {tmpl.capabilities?.slice(0, 4).map((cap, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#444746] font-normal">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#1A73E8] shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                     <span>{cap}</span>
                   </div>
                 ))}
@@ -171,7 +171,7 @@ export default function EmployeeStore() {
 
             <button
               onClick={() => handleOpenHireModal(tmpl)}
-              className="btn-gemini-primary w-full py-3 text-xs font-semibold flex items-center justify-center gap-1.5"
+              className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium flex items-center justify-center gap-1.5 transition"
             >
               <Plus className="w-4 h-4" />
               <span>Deploy {tmpl.name}</span>
@@ -187,40 +187,40 @@ export default function EmployeeStore() {
         title={`Deploy ${hiringTemplate?.name} Representative`}
       >
         <form onSubmit={handleHireSubmit} className="space-y-4 font-sans">
-          <div className="flex items-center gap-3.5 p-3.5 rounded-[20px] bg-[#F0F4F9] border border-[#E3E3E3]">
-            <div className="w-10 h-10 rounded-full bg-[#E8F0FE] flex items-center justify-center text-[#1A73E8] font-bold text-base">
+          <div className="flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-800 font-semibold text-sm">
               {hiringTemplate?.name?.charAt(0)}
             </div>
             <div>
-              <h4 className="font-bold text-[#1F1F1F] text-sm">{hiringTemplate?.name}</h4>
-              <p className="text-xs text-[#1A73E8] font-semibold">{hiringTemplate?.title}</p>
-              <div className="text-[11px] text-[#5F6368] font-mono mt-0.5">Rate: ₹{hiringTemplate?.ratePerMin}/min</div>
+              <h4 className="font-semibold text-slate-900 text-sm">{hiringTemplate?.name}</h4>
+              <p className="text-xs text-slate-500">{hiringTemplate?.title}</p>
+              <div className="text-xs text-slate-600 mt-0.5">Rate: ₹{hiringTemplate?.ratePerMin?.toFixed(2)}/min</div>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Representative Name / Tag</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Representative Name / Tag</label>
             <input
               type="text"
               value={employeeName}
               onChange={(e) => setEmployeeName(e.target.value)}
               required
-              className="w-full px-4 py-2.5 rounded-[12px] border border-[#747775] text-sm text-[#1F1F1F] font-normal focus:outline-none focus:border-[#1A73E8]"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               placeholder="e.g. Meera - Real Estate Sales"
             />
           </div>
 
-          <div className="p-3.5 rounded-[16px] bg-[#E8F0FE] border border-[#1A73E8]/20 text-xs text-[#1F1F1F] space-y-1">
-            <div className="font-semibold text-[#1A73E8]">Next Steps</div>
-            <p className="text-[#5F6368] text-[11px] leading-relaxed font-normal">
-              A dedicated representative instance will be initialized for <strong>ABC Properties</strong>. You will be able to customize business knowledge, FAQs, dialing options, and test call immediately.
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-1">
+            <div className="font-semibold text-slate-900">Provisioning Details</div>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              A dedicated representative instance will be initialized for ABC Properties with custom knowledge parameters, FAQs, and test call studio access.
             </p>
           </div>
 
           <button
             type="submit"
             disabled={hiring}
-            className="btn-gemini-primary w-full py-3 text-xs font-semibold flex items-center justify-center gap-2"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium flex items-center justify-center gap-2 transition"
           >
             {hiring ? 'Initializing Instance...' : `Confirm Deployment`}
           </button>

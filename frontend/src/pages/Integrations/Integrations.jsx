@@ -67,8 +67,8 @@ export default function Integrations() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto font-sans">
       <div>
-        <h1 className="text-2xl font-bold text-[#1F1F1F] tracking-tight">Integrations & Ecosystem Connectors</h1>
-        <p className="text-[#5F6368] text-xs sm:text-sm mt-0.5">Manage production endpoints for WhatsApp Business API, Google Calendar OAuth, and CRM Webhooks.</p>
+        <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">Integrations & Ecosystem Connectors</h1>
+        <p className="text-sm text-slate-500 mt-1">Manage production endpoints for WhatsApp Business API, Google Calendar OAuth, and CRM Webhooks.</p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -76,28 +76,28 @@ export default function Integrations() {
           <div key={item._id} className="gemini-card p-6 flex flex-col justify-between space-y-4">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-2xl bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center font-bold">
-                  <Zap className="w-5 h-5 text-[#1A73E8]" />
+                <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-semibold border border-slate-200">
+                  <Zap className="w-4 h-4 text-slate-600" />
                 </div>
                 <Badge status={item.status} />
               </div>
 
               <div>
-                <h3 className="font-bold text-[#1F1F1F] text-base">{item.name}</h3>
-                <p className="text-xs text-[#5F6368] mt-1 font-mono">{item.type}</p>
+                <h3 className="font-semibold text-slate-900 text-base">{item.name}</h3>
+                <p className="text-xs text-slate-500 mt-0.5 font-mono">{item.type}</p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#F0F4F9] border border-[#E3E3E3] text-[11px] font-mono text-[#1F1F1F] overflow-x-auto leading-relaxed">
+              <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono text-slate-700 overflow-x-auto leading-relaxed">
                 <pre>{JSON.stringify(item.config || {}, null, 2)}</pre>
               </div>
             </div>
 
             <button
               onClick={() => handleOpenConfig(item)}
-              className="w-full py-2.5 rounded-full bg-white hover:bg-[#F8F9FA] text-[#1F1F1F] text-xs font-semibold border border-[#747775] transition flex items-center justify-center gap-1.5 mt-2"
+              className="w-full py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium border border-slate-300 transition flex items-center justify-center gap-1.5 mt-2"
             >
-              <Sliders className="w-4 h-4 text-[#1A73E8]" />
-              <span>Configure Connection Parameters</span>
+              <Sliders className="w-4 h-4 text-slate-500" />
+              <span>Configure Parameters</span>
             </button>
           </div>
         ))}
@@ -107,19 +107,19 @@ export default function Integrations() {
       <Modal isOpen={showConfigModal} onClose={() => setShowConfigModal(false)} title={`Configure ${selectedConfig?.name || 'Integration'}`}>
         <form onSubmit={handleSaveConfig} className="space-y-4 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-[#1F1F1F] mb-1">Configuration Payload (JSON)</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Configuration Payload (JSON)</label>
             <textarea
               rows={6}
               value={configValue}
               onChange={(e) => setConfigValue(e.target.value)}
-              className="w-full p-3.5 rounded-xl border border-[#747775] text-xs font-mono text-[#1F1F1F] focus:outline-none focus:border-[#1A73E8] bg-[#F0F4F9]"
+              className="w-full p-3.5 rounded-lg border border-slate-300 text-xs font-mono text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-slate-50"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 rounded-full bg-[#1A73E8] hover:bg-[#1557B0] text-white font-semibold text-xs transition"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition"
           >
-            Save Configuration Parameters
+            Save Parameters
           </button>
         </form>
       </Modal>
